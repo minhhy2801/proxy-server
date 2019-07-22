@@ -19,9 +19,7 @@ module.exports = {
     dir: './',
     key: 'key.pem',
     cert: 'cert.pem',
-    ca: 'rootCA.pem',
     callback: 'utf8',
   },
-
 };
 
