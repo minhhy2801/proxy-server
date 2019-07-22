@@ -1,0 +1,25 @@
+{
+  "name": "proxy-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "stop": "xxx"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "basic-auth": "^2.0.1",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "https": "^1.0.0",
+    "net": "^1.0.2",
+    "tsscmp": "^1.0.6",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "@cybozu/eslint-config": "^6.0.0",
+    "eslint": "^6.1.0"
+  }
+}
