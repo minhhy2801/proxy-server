@@ -1,7 +1,7 @@
 module.exports = {
   // http proxy without authentication information
   httpWithoutAuth: {
-    port: 3128 
+    port: 3128
   },
 
   // http proxy with authentication information
@@ -25,7 +25,7 @@ module.exports = {
 
   // openssl information for https proxy
   ssl: {
-    dir: './',
+    dir: './common/ssl/',
     key: 'key.pem',
     cert: 'cert.pem',
     callback: 'utf8',

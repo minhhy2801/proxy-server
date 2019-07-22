@@ -18,27 +18,27 @@ Required environment
 `npm start`
 
 **Run server proxy http without authentication**  
-`node httpWithoutAuth.js`  
+`npm run http`  
 **Test**  
-`curl --proxy http://localhost:3127 https://www.google.com`  
+`curl --proxy http://localhost:3128 https://www.google.com`  
 
 **Run server proxy http with authentication**  
-`node httpWithAuth.js`  
+`npm run http-auth`  
 **Test**  
-`curl --proxy http://cybozu:cybozu@localhost:3128 https://www.google.com`   
+`curl --proxy http://cybozu:cybozu@localhost:13128 https://www.google.com`   
 
 **Run server proxy https without authentication**  
-`node httpsWithoutAuth.js`  
+`npm run https`  
 **Test**  
-`curl --proxy curl --proxy-insecure --proxy https://localhost:432 https://www.google.com`  
+`curl --proxy curl --proxy-insecure --proxy https://localhost:443 https://www.google.com`  
 
 **Run server proxy https with authentication**   
-`node httpsWithAuth.js`  
+`npm run https-auth`  
 **Test**   
-`curl --proxy-insecure --proxy https://kintone:kintone@localhost:433 https://www.google.com`
+`curl --proxy-insecure --proxy https://kintone:kintone@localhost:1443 https://www.google.com`
 
 ## Config
-Go to file **config.js** to modify information of server proxy
+Go to file **./common/config.js** to modify information of server proxy
 ```
 module.exports = {
   // http proxy without authentication information
@@ -67,7 +67,7 @@ module.exports = {
 
   // openssl information for https proxy
   ssl: {
-    dir: './',
+    dir: './common/ssl/',
     key: 'key.pem',
     cert: 'cert.pem',
     callback: 'utf8',

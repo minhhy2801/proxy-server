@@ -1,6 +1,6 @@
 const http = require('http');
-const util = require('./util');
-const config = require('./config');
+const util = require('../common/util');
+const config = require('../common/config');
 
 const serverHttpWithoutAuth = http.createServer().listen(config.httpWithoutAuth.port);
 
@@ -9,7 +9,6 @@ const getHttpWithoutAuth = () => {
     util.setAccessSocket(req, socket);
   });
 };
-
 
 module.exports = {
   getHttpWithoutAuth

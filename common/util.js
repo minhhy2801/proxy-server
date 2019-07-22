@@ -3,12 +3,13 @@ const ssl = require('./config').ssl,
   compare = require('tsscmp'),
   fs = require('fs'),
   url = require('url'),
+  path = require('path'),
   net = require('net');
 
 const getSslInformation = () => {
   return {
-    key: fs.readFileSync(ssl.dir + ssl.key, ssl.callback),
-    cert: fs.readFileSync(ssl.dir + ssl.cert, ssl.callback),
+    key: fs.readFileSync(path.resolve(ssl.dir + ssl.key), ssl.callback),
+    cert: fs.readFileSync(path.resolve(ssl.dir + ssl.cert), ssl.callback),
   };
 };
 
@@ -36,8 +37,8 @@ const setAccessSocket = (req, socket) => {
   const serverUrl = url.parse('https://' + req.url);
   const srvSocket = net.connect(serverUrl.port, serverUrl.hostname, () => {
     socket.write('HTTP/1.1 200 Connection Established\r\n' +
-            'Proxy-agent: Node-Proxy\r\n' +
-            '\r\n');
+      'Proxy-agent: Node-Proxy\r\n' +
+      '\r\n');
     srvSocket.pipe(socket);
     socket.pipe(srvSocket);
   });

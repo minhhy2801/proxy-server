@@ -1,11 +1,15 @@
 {
-  "name": "proxy-scripts",
+  "name": "proxy-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "stop": "xxx"
+    "http-auth": "node ./server/httpWithAuth.js",
+    "https-auth": "node ./server/httpsWithAuth.js",
+    "http": "node ./server/httpWithoutAuth.js",
+    "https": "node ./server/httpsWithoutAuth.js"
+
   },
   "author": "",
   "license": "ISC",

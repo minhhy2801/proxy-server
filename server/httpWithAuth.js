@@ -1,6 +1,6 @@
 const http = require('http');
-const util = require('./util');
-const config = require('./config');
+const util = require('../common/util');
+const config = require('../common/config');
 
 const serverHttp = http.createServer().listen(config.httpWithAuth.port);
 
