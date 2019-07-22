@@ -7,7 +7,11 @@ This tool for building proxies server:
 
 Required environment
 - OS: centos 7
-- nodejs: v10.16.0
+- nodejs: v10.16.0  
+
+## Install 
+- Clone this repository
+- Run `npm i`
 
 ## Usage
 ### Run all servers proxy
