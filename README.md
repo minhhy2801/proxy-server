@@ -30,7 +30,7 @@ Required environment
 **Run server proxy https without authentication**  
 `npm run https`  
 **Test**  
-`curl --proxy curl --proxy-insecure --proxy https://localhost:443 https://www.google.com`  
+`curl --proxy-insecure --proxy https://localhost:443 https://www.google.com`  
 
 **Run server proxy https with authentication**   
 `npm run https-auth`  
