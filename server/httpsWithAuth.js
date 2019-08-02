@@ -13,7 +13,7 @@ const getHttpsWithAuth = () => {
     } else {
       console.log('Received reverse proxy request for:' + req.url);
       const credential = util.getCredential(req);
-      const checkValidAuth = util.checkAuth(credential.name, credential.pass, config.httpWithAuth.username, config.httpWithAuth.password);
+      const checkValidAuth = util.checkAuth(credential.name, credential.pass, config.httpsWithAuth.username, config.httpsWithAuth.password);
       if (!credential || !checkValidAuth) {
         console.log('Crendentials provided are invalid. Ending connection.');
         util.denyAccess(socket);
