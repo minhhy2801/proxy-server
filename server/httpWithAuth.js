@@ -5,13 +5,20 @@ const config = require('../common/config');
 const serverHttp = http.createServer().listen(config.httpWithAuth.port);
 
 const getHttpWithAuth = () => {
-  serverHttp.on('connect', (req, socket) => {
-    const credential = util.getCredential(req);
-    const checkValidAuth = util.checkAuth(credential.name, credential.pass, config.httpWithAuth.username, config.httpWithAuth.password);
-    if (!credential || !checkValidAuth) {
-      util.setAccessDeniedSocket(socket);
+  serverHttp.on('connect', (req, socket, head) => {
+    if (!req.headers['proxy-authorization']) {
+      console.log('Unauthorized proxy request. Requesting authorization.');
+      util.requestProxyAuth(socket);
     } else {
-      util.setAccessSocket(req, socket);
+      console.log('Received reverse proxy request for:' + req.url);
+      const credential = util.getCredential(req);
+      const checkValidAuth = util.checkAuth(credential.name, credential.pass, config.httpWithAuth.username, config.httpWithAuth.password);
+      if (!credential || !checkValidAuth) {
+        console.log('Crendentials provided are invalid. Ending connection.');
+        util.denyAccess(socket);
+      } else {
+        util.proxyRequest(req, socket, head);
+      }
     }
   });
 };

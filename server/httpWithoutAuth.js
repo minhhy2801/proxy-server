@@ -5,8 +5,9 @@ const config = require('../common/config');
 const serverHttpWithoutAuth = http.createServer().listen(config.httpWithoutAuth.port);
 
 const getHttpWithoutAuth = () => {
-  serverHttpWithoutAuth.on('connect', (req, socket) => {
-    util.setAccessSocket(req, socket);
+  serverHttpWithoutAuth.on('connect', (req, socket, head) => {
+    console.log('Received reverse proxy request for:' + req.url);
+    util.proxyRequest(req, socket, head);
   });
 };
 

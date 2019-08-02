@@ -21,24 +21,32 @@ const checkAuth = (inputName, inputPass, validName, validPass) => {
   return isValid;
 };
 
-
 const getCredential = (req) => {
   return auth.parse(req.headers['proxy-authorization']);
 };
-const setAccessDeniedSocket = (socket) => {
-  socket.statusCode = 401;
-  socket.write('WWW-Authenticate Basic realm="example"\r\n');
-  socket.end('Access denied');
+
+const requestProxyAuth = (socket) => {
+  socket.write('HTTP/1.1 407 Proxy Authentication required\r\n' +
+  'Proxy-Authenticate: Basic\r\n' +
+  'Proxy-Authenticate: Negotiate\r\n' +
+  '\r\n');
+  socket.pipe(socket);
 };
 
-const setAccessSocket = (req, socket) => {
-  console.log('Receiving reverse proxy request for:' + req.url);
+const denyAccess = (socket) => {
+  socket.write('HTTP/1.1 401 Unauthorized\r\n');
+  socket.end();
+};
+
+const proxyRequest = (req, socket, head) => {
+  console.log('Proxying request for:' + req.url);
   // eslint-disable-next-line node/no-deprecated-api
   const serverUrl = url.parse('https://' + req.url);
   const srvSocket = net.connect(serverUrl.port, serverUrl.hostname, () => {
     socket.write('HTTP/1.1 200 Connection Established\r\n' +
-      'Proxy-agent: Node-Proxy\r\n' +
+      'Proxy-agent: node-simple-proxy\r\n' +
       '\r\n');
+    srvSocket.write(head);
     srvSocket.pipe(socket);
     socket.pipe(srvSocket);
   });
@@ -49,6 +57,7 @@ module.exports = {
   getSslInformation,
   checkAuth,
   getCredential,
-  setAccessDeniedSocket,
-  setAccessSocket
+  requestProxyAuth,
+  denyAccess,
+  proxyRequest
 };

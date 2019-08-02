@@ -9,7 +9,6 @@
     "https-auth": "node ./server/httpsWithAuth.js",
     "http": "node ./server/httpWithoutAuth.js",
     "https": "node ./server/httpsWithoutAuth.js"
-
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +16,7 @@
     "basic-auth": "^2.0.1",
     "fs": "0.0.1-security",
     "http": "0.0.0",
+    "http-proxy": "^1.17.0",
     "https": "^1.0.0",
     "net": "^1.0.2",
     "tsscmp": "^1.0.6",
